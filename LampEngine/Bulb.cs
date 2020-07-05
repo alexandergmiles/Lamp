@@ -13,11 +13,17 @@ namespace LampEngine
     {
         public bool powerState { get; private set; }
         public IPAddress networkAddress { get; set; }
-        public Bulb(IPAddress network) => (networkAddress) = (network);
-        public bool TurnOn()
+        public Bulb(string ipaddress) 
         {
-            return true;
+            var address = ipaddress.Split('.');
+            networkAddress = new System.Net.IPAddress(new byte[] { 
+                Convert.ToByte(address[0]), 
+                Convert.ToByte(address[1]),
+                Convert.ToByte(address[2]), 
+                Convert.ToByte(address[3])});
         }
+        
+        public Bulb(IPAddress ipAddress) => (networkAddress) = (ipAddress);
 
         public bool SendQuery(BulbCommand command)
         {
