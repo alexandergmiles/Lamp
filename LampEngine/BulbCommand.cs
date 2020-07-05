@@ -23,6 +23,11 @@ namespace LampEngine
         ///</summary>
         public BulbCommand(string command) => (CommandString) = (command);
 
+        public BulbCommand(string command, Dictionary<String, object> parameterValues)
+        {
+            CommandString = CreateCommandWithParameters(parameterValues, command);
+        }
+
         public string GetCachedResponse => CachedResponse;
 
         /// <summary>
@@ -102,6 +107,22 @@ namespace LampEngine
             CachedResponse = response.ToString();
             //Return the decrypted value
             return CachedResponse;
+        }
+
+        /// <summary>
+        /// Takes the KnownCommand and throws in the parameter values
+        /// </summary>
+        /// <param name="parameterValues">KeyValue dict containing the parameters and their values</param>
+        /// <param name="commandToParameterise">The known command to parameterise</param>
+        /// <returns></returns>
+        private string CreateCommandWithParameters(Dictionary<string, object> parameterValues, string commandToParameterise)
+        {
+            foreach (var parameter in parameterValues)
+            {
+                commandToParameterise = commandToParameterise.Replace(parameter.Key.ToString(), parameter.Value.ToString());
+            }
+
+            return commandToParameterise;
         }
     }
 }
