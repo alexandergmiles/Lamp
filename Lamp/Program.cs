@@ -16,9 +16,13 @@ namespace Lamp
             Bulb lamp = new Bulb("192.168.1.139");
 
             Console.WriteLine($"Is the lamp on? {lamp.isNetworked()}");
-
-            BulbCommand getSystemInfo = new BulbCommand(KnownCommands.GetSystemInfo);
-            //BulbCommand aliasCommand = new BulbCommand(KnownCommands.Alias, new Dictionary<string, object>() { { "{alias}", "DebugBulb" } });
+            
+            
+            BulbCommand reboot = new BulbCommand(KnownCommands.Reboot, new Dictionary<string, object>() { { "{delay}", 1 } });
+            //BulbCommand getSystemInfo = new BulbCommand(KnownCommands.GetSystemInfo);
+            
+            
+            BulbCommand aliasCommand = new BulbCommand(KnownCommands.Alias, new Dictionary<string, object>() { { "{alias}", "DebugBulb" } });
             var colour = new Dictionary<string, object>();
             colour.Add("{ignore_default}", 1);
             colour.Add("{mode}", "normal");
@@ -30,17 +34,10 @@ namespace Lamp
             colour.Add("{transition_period}", 150);
 
             BulbCommand setColour = new BulbCommand(KnownCommands.SetColour, colour);
-
-            var systemInfo = lamp.SendQuery<BulbSystem>(getSystemInfo);
-
-            if (systemInfo.systemInformation.BulbInfo.ErrorCode == 0)
-            {
-                Console.WriteLine($"Device ID: {systemInfo.systemInformation.BulbInfo?.DeviceID}");
-                Console.WriteLine($"Device name: {systemInfo.systemInformation.BulbInfo?.Alias}");
-                Console.WriteLine($"Current hue: {systemInfo.systemInformation.BulbInfo.lightState?.Hue}");
-            }
-
-            //lamp.SendQuery(setColour);
+          
+            var systemInfo = lamp.GetBulbInfo();
+            Console.WriteLine(systemInfo.Alias);
+           
             Console.ReadLine();
         }
     }

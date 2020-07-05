@@ -5,9 +5,9 @@ using System.Text;
 
 namespace LampEngine
 {
-    public class CurrentSystemInformation
+    internal class CurrentSystemInformationDTO
     {
         [JsonProperty("get_sysinfo")]
-        public SystemInfo BulbInfo { get; set; }
+        public SystemInfoDTO BulbInfo { get; set; }
     }
 }

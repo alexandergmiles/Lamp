@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LampEngine
 {
-    public class SystemInfo
+    internal class SystemInfoDTO
     {
         [JsonProperty("sw_ver")]
         public string SoftwareVersion { get; set; }
@@ -47,10 +47,10 @@ namespace LampEngine
         public string DiscoVersion { get; set; }
 
         [JsonProperty("ctrl_protocols")]
-        public ControlProtocols controlProtocols { get; set; }
+        public ControlProtocolsDTO controlProtocols { get; set; }
 
         [JsonProperty("light_state")]
-        public LightState lightState { get; set; }
+        public LightStateDTO lightState { get; set; }
 
         [JsonProperty("is_dimmable")]
         public int IsDimmable { get; set; }
@@ -62,7 +62,7 @@ namespace LampEngine
         public int IsVariableColourTemp { get; set; }
 
         [JsonProperty("preferred_state")]
-        public List<PreferredState> preferredStates { get; set; }
+        public List<PreferredStateDTO> preferredStates { get; set; }
 
         [JsonProperty("rssi")]
         public int RSSI { get; set; }

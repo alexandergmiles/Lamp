@@ -5,12 +5,7 @@ using System.Text;
 namespace LampEngine
 {
     public static class KnownCommands
-    {
-        /// <summary>
-        /// Returns the info of the bulb that it is passed to
-        /// </summary>
-        public static string GetSystemInfo = "{\"system\":{\"get_sysinfo\":\"\"}}";
-        
+    {        
         /// <summary>
         /// Reboots the with a delay provided defined by {delay}
         /// </summary>        

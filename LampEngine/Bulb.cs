@@ -6,13 +6,15 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-
+using LampEngine.Commands;
 namespace LampEngine
 {
     public sealed class Bulb
     {
+        public BulbInformation BulbInformation { get; set; }
         public bool powerState { get; private set; }
         public IPAddress networkAddress { get; set; }
+
         public Bulb(string ipaddress) 
         {
             var address = ipaddress.Split('.');
@@ -20,10 +22,10 @@ namespace LampEngine
                 Convert.ToByte(address[0]), 
                 Convert.ToByte(address[1]),
                 Convert.ToByte(address[2]), 
-                Convert.ToByte(address[3])});
+                Convert.ToByte(address[3])});   
         }
         
-        public Bulb(IPAddress ipAddress) => (networkAddress) = (ipAddress);
+        public Bulb(IPAddress ipAddress) => (networkAddress, BulbInformation) = (ipAddress, GetBulbInfo());
 
         public bool SendQuery(BulbCommand command)
         {
@@ -107,6 +109,19 @@ namespace LampEngine
                 Console.WriteLine(e);
             }
             return default(T);
+        }
+
+        public BulbInformation GetBulbInfo()
+        {
+            //Execute the command to get the bulb info
+            var getSystemInfo = new BulbCommand(GetSystemInfo.SystemInfoEndpoint);
+            var result = SendQuery<BulbSystemDTO>(getSystemInfo);
+            
+            //Cache the bulb information
+            BulbInformation = result.AsBulbInformation();
+            
+            //Return the bulb information
+            return BulbInformation;
         }
 
         public bool isNetworked() => new Ping().Send(networkAddress.ToString()).Status == IPStatus.Success ?  true : false;

@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Newtonsoft.Json;
 
 namespace LampEngine
 {
     public class LightState
     {
-        [JsonProperty("on_off")]
-        public int OnOff { get; set; }
-
-        [JsonProperty("mode")]
-        public string Mode { get; set; }
-
-        [JsonProperty("hue")]
+        public LightState(int hue, int saturation, int colourTemp, int brightness) => 
+            (Hue, Saturation, ColourTemperature, Brightness) = (hue, saturation, colourTemp, brightness);
         public int Hue { get; set; }
-
-        [JsonProperty("saturation")]
         public int Saturation { get; set; }
-
-        [JsonProperty("color_temp")]
-        public int ColourTemperature { get; set; }
-
-        [JsonProperty("brightness")]
+        public int ColourTemperature{ get; set; }
         public int Brightness { get; set; }
     }
 }
