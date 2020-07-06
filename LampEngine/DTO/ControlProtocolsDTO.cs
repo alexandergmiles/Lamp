@@ -4,7 +4,7 @@ using System.Text;
 using Newtonsoft.Json;
 namespace LampEngine
 {
-    internal class ControlProtocolsDTO
+    internal class ControlProtocolsDTO : DTO
     {
         [JsonProperty("name")]
         public string Name { get; set; }

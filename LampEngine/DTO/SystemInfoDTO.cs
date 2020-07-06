@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LampEngine
 {
-    internal class SystemInfoDTO
+    internal class SystemInfoDTO : DTO
     {
         [JsonProperty("sw_ver")]
         public string SoftwareVersion { get; set; }

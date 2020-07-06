@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace LampEngine.Commands
 {
-    public class GetSystemInfo
+    public sealed class GetSystemInfo : BulbCommand
     {
         /// <summary>
         /// Returns the info of the bulb that it is passed to
         /// </summary>
-        public static string SystemInfoEndpoint = "{\"system\":{\"get_sysinfo\":\"\"}}";
+        private const string SystemInfoEndpoint = "{\"system\":{\"get_sysinfo\":\"\"}}";
+
+        public GetSystemInfo() : base(SystemInfoEndpoint) {}
     }
 }

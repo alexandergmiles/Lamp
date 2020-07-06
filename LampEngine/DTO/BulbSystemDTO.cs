@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace LampEngine
 {
-    public class BulbSystemDTO
+    public class BulbSystemDTO : DTO
     {
         [JsonProperty("system")]
         CurrentSystemInformationDTO systemInformation { get; set; }

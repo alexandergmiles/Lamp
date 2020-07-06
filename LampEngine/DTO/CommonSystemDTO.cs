@@ -5,9 +5,9 @@ using System.Text;
 
 namespace LampEngine
 {
-    public class CommonSystemDTO
-    {
+    public class CommonSystemDTO : DTO
+    { 
         [JsonProperty("reboot")]
-        public Reboot reboot { get; set; }
+        public RebootDTO reboot { get; set; }
     }
 }

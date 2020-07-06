@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using LampEngine.Commands;
 namespace LampEngine
 {
-    public class Bulb
+    public class Bulb : IBulb
     {
         public BulbInformation BulbInformation { get; set; }
         public bool powerState { get; private set; }
@@ -39,7 +39,7 @@ namespace LampEngine
         /// </summary>
         /// <param name="command">The command to be sent to the bulb</param>
         /// <returns>JSON response from the device</returns>
-        public string SendQuery(BulbCommand command)
+        private string SendQuery(BulbCommand command)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace LampEngine
         /// <typeparam name="T">Type which the result will parse into</typeparam>
         /// <param name="command">The command to be sent to the bulb</param>
         /// <returns>Result of </returns>
-        public T SendQuery<T>(BulbCommand<T> command)
+        private T SendQuery<T>(BulbCommand command)
         {
             try
             {
@@ -128,8 +128,7 @@ namespace LampEngine
 
         public BulbInformation GetBulbInfo()
         {
-            //Execute the command to get the bulb info
-            var getSystemInfo = new BulbCommand<BulbSystemDTO>(GetSystemInfo.SystemInfoEndpoint);
+            var getSystemInfo = new GetSystemInfo();
             var result = SendQuery<BulbSystemDTO>(getSystemInfo);
             
             //Cache the bulb information
@@ -140,5 +139,19 @@ namespace LampEngine
         }
 
         public bool isNetworked() => new Ping().Send(networkAddress.ToString()).Status == IPStatus.Success ?  true : false;
+
+        public OperationResult SetAlias(string AliasToSet)
+        {
+            var setAlias = new SetAlias(AliasToSet);
+            var result = SendQuery<SetAliasDTO>(setAlias);
+            return new OperationResult(result.GetErrorCode().Value);
+        }
+
+        public OperationResult Reboot(int delay)
+        {
+            var reboot = new Reboot(delay);
+            var result = SendQuery<RebootDTO>(reboot);
+            return new OperationResult(result.ErrorCode);
+        }
     }
 }

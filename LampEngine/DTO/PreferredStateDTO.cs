@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LampEngine
 {
-    internal class PreferredStateDTO
+    internal class PreferredStateDTO : DTO
     {
         [JsonProperty("index")]
         public int Index { get; set; }

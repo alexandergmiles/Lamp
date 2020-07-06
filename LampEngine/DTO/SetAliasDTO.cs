@@ -4,13 +4,18 @@ using System.Text;
 using Newtonsoft.Json;
 namespace LampEngine
 {
-    public class SetAliasCommand
+    public class SetAliasDTO
     {
         [JsonProperty("smartlife.iot.common.system")]
         SetDevAlias DevAlias { get; set; }
 
         public int? GetErrorCode() => DevAlias.Alias?.ErrorCode;
         public string GetDeviceAlias() => DevAlias.Alias?.DeviceAlias;
+    }
+
+    public class SetAliasResultDTO
+    {
+
     }
 
     internal class SetDevAlias

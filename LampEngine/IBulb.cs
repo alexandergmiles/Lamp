@@ -11,9 +11,8 @@ namespace LampEngine
     /// </summary>
     public interface IBulb
     {
-        public string SendQuery(BulbCommand command);
-        public T SendQuery<T>(BulbCommand command);
         public BulbInformation GetBulbInfo();
+        public OperationResult SetAlias(string AliasToSet);
         public bool isNetworked();
     }
 }

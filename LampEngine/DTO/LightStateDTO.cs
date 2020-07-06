@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace LampEngine
 {
-    internal class LightStateDTO
+    internal class LightStateDTO : DTO
     {
         [JsonProperty("on_off")]
         public int OnOff { get; set; }
