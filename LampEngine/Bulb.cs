@@ -9,12 +9,16 @@ using System.Threading.Tasks;
 using LampEngine.Commands;
 namespace LampEngine
 {
-    public sealed class Bulb
+    public class Bulb
     {
         public BulbInformation BulbInformation { get; set; }
         public bool powerState { get; private set; }
         public IPAddress networkAddress { get; set; }
 
+        /// <summary>
+        /// Constructor taking a string instead of IPAddress object
+        /// </summary>
+        /// <param name="ipaddress">IPAddress string</param>
         public Bulb(string ipaddress) 
         {
             var address = ipaddress.Split('.');
@@ -24,10 +28,18 @@ namespace LampEngine
                 Convert.ToByte(address[2]), 
                 Convert.ToByte(address[3])});   
         }
-        
+        /// <summary>
+        /// Constructor that takes an IPAddress object already created
+        /// </summary>
+        /// <param name="ipAddress"></param>
         public Bulb(IPAddress ipAddress) => (networkAddress, BulbInformation) = (ipAddress, GetBulbInfo());
 
-        public bool SendQuery(BulbCommand command)
+        /// <summary>
+        /// Send the current bulb command, returning the response as a JSON string
+        /// </summary>
+        /// <param name="command">The command to be sent to the bulb</param>
+        /// <returns>JSON response from the device</returns>
+        public string SendQuery(BulbCommand command)
         {
             try
             {
@@ -58,20 +70,23 @@ namespace LampEngine
 
                 //Print out the result of the query. In reality, we'll be returning a command result
                 //based on the command sent
-                Console.WriteLine(command.DecryptResponse(resultString));
-
-                //let's just return true
-                return true;
+                return command.DecryptResponse(resultString);
             }
             catch (Exception e)
             {
                 //What a crude way of handling this
                 Console.WriteLine(e);
             }
-            return false;
+            return null;
         }
 
-        public T SendQuery<T>(BulbCommand command)
+        /// <summary>
+        /// Returns an object of type T which is the parsed result of the query
+        /// </summary>
+        /// <typeparam name="T">Type which the result will parse into</typeparam>
+        /// <param name="command">The command to be sent to the bulb</param>
+        /// <returns>Result of </returns>
+        public T SendQuery<T>(BulbCommand<T> command)
         {
             try
             {
@@ -114,7 +129,7 @@ namespace LampEngine
         public BulbInformation GetBulbInfo()
         {
             //Execute the command to get the bulb info
-            var getSystemInfo = new BulbCommand(GetSystemInfo.SystemInfoEndpoint);
+            var getSystemInfo = new BulbCommand<BulbSystemDTO>(GetSystemInfo.SystemInfoEndpoint);
             var result = SendQuery<BulbSystemDTO>(getSystemInfo);
             
             //Cache the bulb information

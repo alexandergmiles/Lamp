@@ -21,13 +21,12 @@ namespace Lamp
             BulbCommand reboot = new BulbCommand(KnownCommands.Reboot, new Dictionary<string, object>() { { "{delay}", 1 } });
             //BulbCommand getSystemInfo = new BulbCommand(KnownCommands.GetSystemInfo);
             
-            
             BulbCommand aliasCommand = new BulbCommand(KnownCommands.Alias, new Dictionary<string, object>() { { "{alias}", "DebugBulb" } });
             var colour = new Dictionary<string, object>();
             colour.Add("{ignore_default}", 1);
             colour.Add("{mode}", "normal");
             colour.Add("{hue}", 160);
-            colour.Add("{on_off}", 1);
+            colour.Add("{on_off}", 0);
             colour.Add("{saturation}", 65);
             colour.Add("{colour_temp}", 0);
             colour.Add("{brightness}", 10);
@@ -36,8 +35,10 @@ namespace Lamp
             BulbCommand setColour = new BulbCommand(KnownCommands.SetColour, colour);
           
             var systemInfo = lamp.GetBulbInfo();
+            lamp.SendQuery(setColour);
+
+
             Console.WriteLine(systemInfo.Alias);
-           
             Console.ReadLine();
         }
     }
