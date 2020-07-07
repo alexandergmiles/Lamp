@@ -4,17 +4,19 @@ using System.Text;
 using Newtonsoft.Json;
 namespace LampEngine
 {
-    public class RebootCommandDTO : DTO
+    class RebootCommandDTO : DTO
     {
         [JsonProperty("smartlife.iot.common.system")]
         public CommonSystemDTO commonSystem { get; set; }
     }
-
-    public class RebootDTO : DTO
+    internal class CommonSystemDTO : DTO
     {
-        [JsonProperty("delay")]
-        public int Delay { get; set; }
+        [JsonProperty("reboot")]
+        public RebootDTO reboot { get; set; }
+    }
 
+    internal class RebootDTO : DTO
+    {
         [JsonProperty("err_code")]
         public int ErrorCode { get; }
     }

@@ -1,12 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using LampEngine.Commands;
+using Newtonsoft.Json;
 using System;
 using System.Net;
-using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
-using LampEngine.Commands;
 namespace LampEngine
 {
     public class Bulb : IBulb
@@ -15,18 +14,20 @@ namespace LampEngine
         public bool powerState { get; private set; }
         public IPAddress networkAddress { get; set; }
 
+        public string GetNetworkAddress() => networkAddress.ToString();
+
         /// <summary>
         /// Constructor taking a string instead of IPAddress object
         /// </summary>
         /// <param name="ipaddress">IPAddress string</param>
-        public Bulb(string ipaddress) 
+        public Bulb(string ipaddress)
         {
             var address = ipaddress.Split('.');
-            networkAddress = new System.Net.IPAddress(new byte[] { 
-                Convert.ToByte(address[0]), 
+            networkAddress = new System.Net.IPAddress(new byte[] {
+                Convert.ToByte(address[0]),
                 Convert.ToByte(address[1]),
-                Convert.ToByte(address[2]), 
-                Convert.ToByte(address[3])});   
+                Convert.ToByte(address[2]),
+                Convert.ToByte(address[3])});
         }
         /// <summary>
         /// Constructor that takes an IPAddress object already created
@@ -39,25 +40,25 @@ namespace LampEngine
         /// </summary>
         /// <param name="command">The command to be sent to the bulb</param>
         /// <returns>JSON response from the device</returns>
-        private string SendQuery(BulbCommand command)
+        public string SendQuery(BulbCommand command)
         {
             try
             {
                 //Let's encrypt the command
                 var encryptedCommand = command.EncryptCommand();
-                
+
                 //Setup the socket that'll be used for communication
                 var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                
+
                 //Create the EndPoint from the IPAddress
                 IPEndPoint endPoint = new IPEndPoint(networkAddress, 9999);
-                
+
                 //Prepare the data
                 var dataToSend = Encoding.Convert(Encoding.UTF8, Encoding.GetEncoding("ISO-8859-1"), Encoding.UTF8.GetBytes(command.ParsedCommandString));
-                
+
                 //Send the data byte[] to the endpoint we created previously
                 socket.SendTo(dataToSend, endPoint);
-                
+
                 //The buffer we're going to read the data into
                 byte[] buffer = new byte[1024];
 
@@ -86,7 +87,7 @@ namespace LampEngine
         /// <typeparam name="T">Type which the result will parse into</typeparam>
         /// <param name="command">The command to be sent to the bulb</param>
         /// <returns>Result of </returns>
-        private T SendQuery<T>(BulbCommand command)
+        public T SendQuery<T>(BulbCommand command)
         {
             try
             {
@@ -126,19 +127,29 @@ namespace LampEngine
             return default(T);
         }
 
+        public async Task<T> SendQueryAsync<T>(BulbCommand command)
+        {
+            var encryptedCommand = command.EncryptCommand();
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            IPEndPoint endPoint = new IPEndPoint(networkAddress, 9999);
+
+            socket.SendToAsync(new SocketAsyncEventArgs());
+            return default(T);
+        }
+
         public BulbInformation GetBulbInfo()
         {
             var getSystemInfo = new GetSystemInfo();
             var result = SendQuery<BulbSystemDTO>(getSystemInfo);
-            
+
             //Cache the bulb information
             BulbInformation = result.AsBulbInformation();
-            
+
             //Return the bulb information
             return BulbInformation;
         }
 
-        public bool isNetworked() => new Ping().Send(networkAddress.ToString()).Status == IPStatus.Success ?  true : false;
+        public bool isNetworked() => new Ping().Send(networkAddress.ToString()).Status == IPStatus.Success ? true : false;
 
         public OperationResult SetAlias(string AliasToSet)
         {
@@ -153,5 +164,6 @@ namespace LampEngine
             var result = SendQuery<RebootDTO>(reboot);
             return new OperationResult(result.ErrorCode);
         }
+
     }
 }

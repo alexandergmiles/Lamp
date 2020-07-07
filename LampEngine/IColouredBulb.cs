@@ -4,8 +4,12 @@ using System.Text;
 
 namespace LampEngine
 {
-    interface IColouredBulb : IBulb
+    public interface IColouredBulb : IBulb
     {
-        public BulbInformation SetColour(LightState colour);
+        public string SetColour(LightState colour);
+
+        public LightState GetColour();
+
+        public OperationResult TogglePower();
     }
 }

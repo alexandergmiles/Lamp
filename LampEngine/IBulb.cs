@@ -11,6 +11,7 @@ namespace LampEngine
     /// </summary>
     public interface IBulb
     {
+        public string GetNetworkAddress();
         public BulbInformation GetBulbInfo();
         public OperationResult SetAlias(string AliasToSet);
         public bool isNetworked();

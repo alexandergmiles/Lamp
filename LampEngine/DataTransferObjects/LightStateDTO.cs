@@ -25,7 +25,10 @@ namespace LampEngine
         [JsonProperty("brightness")]
         public int Brightness { get; set; }
 
-        public LightState LightState() =>  new LightState(Hue, Saturation, ColourTemperature, Brightness);
+        [JsonProperty("err_code")]
+        public int ErrorCode { get; set; }
+
+        public LightState AsLightState() =>  new LightState(1, 5, "normal", OnOff, Hue, Saturation, ColourTemperature, Brightness);
        
     }
 }

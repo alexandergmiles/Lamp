@@ -5,28 +5,33 @@ using System.Text;
 
 namespace LampEngine
 {
+    internal class CurrentSystemInformationDTO : DTO
+    {
+        [JsonProperty("get_sysinfo")]
+        public SystemInfoDTO BulbInfo { get; set; }
+    }
     internal class SystemInfoDTO : DTO
     {
         [JsonProperty("sw_ver")]
         public string SoftwareVersion { get; set; }
-        
+
         [JsonProperty("hw_ver")]
         public string HardwareVersion { get; set; }
 
         [JsonProperty("model")]
-        public string Model { get; set;  }
+        public string Model { get; set; }
 
         [JsonProperty("description")]
-        public string Description { get; set;  }
+        public string Description { get; set; }
 
         [JsonProperty("alias")]
         public string Alias { get; set; }
 
         [JsonProperty("mic_type")]
-        public string MicType { get; set;  }
+        public string MicType { get; set; }
 
         [JsonProperty("dev_state")]
-        public string DevState { get; set;  }
+        public string DevState { get; set; }
 
         [JsonProperty("mic_mac")]
         public string MicMAC { get; set; }
@@ -75,5 +80,32 @@ namespace LampEngine
 
         [JsonProperty("err_code")]
         public int ErrorCode { get; set; }
+    }
+
+        internal class PreferredStateDTO : DTO
+    {
+        [JsonProperty("index")]
+        public int Index { get; set; }
+        
+        [JsonProperty("hue")]
+        public int Hue { get; set; }
+
+        [JsonProperty("saturation")]
+        public int Saturation { get; set; }
+
+        [JsonProperty("color_temp")]
+        public int ColourTemperature { get; set; }
+
+        [JsonProperty("brightness")]
+        public int Brightness { get; set; }
+    }
+
+    internal class ControlProtocolsDTO : DTO
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("version")]
+        public string Version { get; set; }
     }
 }

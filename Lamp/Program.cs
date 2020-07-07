@@ -12,32 +12,37 @@ namespace Lamp
     {
         public static void Main(string[] args)
         {
-
-            Bulb lamp = new Bulb("192.168.1.139");
-
-            Console.WriteLine($"Is the lamp on? {lamp.isNetworked()}");
+            //Let's test a coloured bulb
+            IColouredBulb bulb = new ColouredBulb("192.168.1.139");
             
-            
-            //BulbCommand reboot = new BulbCommand(KnownCommands.Reboot, new Dictionary<string, object>() { { "{delay}", 1 } });
-            
-            //BulbCommand aliasCommand = new BulbCommand(KnownCommands.Alias, new Dictionary<string, object>() { { "{alias}", "DebugBulb" } });
-            var colour = new Dictionary<string, object>();
-            colour.Add("{ignore_default}", 1);
-            colour.Add("{mode}", "normal");
-            colour.Add("{hue}", 160);
-            colour.Add("{on_off}", 0);
-            colour.Add("{saturation}", 65);
-            colour.Add("{colour_temp}", 0);
-            colour.Add("{brightness}", 10);
-            colour.Add("{transition_period}", 150);
+            //Normal bulb tbh
+            IBulb lamp = new Bulb("192.168.1.139");
 
-            //BulbCommand setColour = new BulbCommand(KnownCommands.SetColour, colour);
-            var systemInfo = lamp.GetBulbInfo();
-            var rebootResult = lamp.Reboot(5);
+            //Let's make sure we're connected
+            Console.WriteLine($"Is the lamp on? {lamp.isNetworked()} connected at {lamp.GetNetworkAddress()}");
 
-            lamp.SetAlias("New name");
-            Console.WriteLine(rebootResult.ErrorCode);
-            Console.WriteLine(systemInfo.Alias);
+            //Running the operation and getting the values from these
+            //var systemInfo = lamp.GetBulbInfo();
+            //var rebootResult = lamp.Reboot(5);
+            //var aliasResult = lamp.SetAlias("New name");
+
+            var bulbColour = bulb.GetColour();
+            
+            //Get the current Hue
+            Console.WriteLine(bulbColour.Hue);
+           
+            //Set the bulb to green
+            //var result = bulb.SetColour(new LightState(1, 5, "normal", 1, 120, 100, 0, 100));
+            
+            //Get the colour of the bulb
+            //var newBulbColour = bulb.GetColour();
+            
+            //Console.WriteLine(newBulbColour.Hue);
+            bulb.TogglePower();
+            //Let's print out to the console
+            //Console.WriteLine(result);
+            //Console.WriteLine(rebootResult.ErrorCode);
+            //Console.WriteLine(systemInfo.Alias);
             Console.ReadLine();
         }
     }
