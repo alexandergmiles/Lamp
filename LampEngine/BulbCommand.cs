@@ -30,16 +30,32 @@ namespace LampEngine
         {
             CommandString = CreateCommandWithParameters(parameterValues, command);
         }
+
+        /// <summary>
+        /// Dynamically generates a Dictionary of all properties used in the string that are stored as 
+        /// properties within the object
+        /// </summary>
+        /// <typeparam name="T">The type of object</typeparam>
+        /// <param name="command">The command string</param>
+        /// <param name="instance">The instance of T which has the values</param>
+        /// <returns></returns>
         public Dictionary<string, object> GetParameters<T>(string command, T instance)
         {
+            //Create the parameter container
             var parameters = new Dictionary<string, object>();
+            
+            //Get all the properties the Type instance has
             var props = instance.GetType().GetProperties();
+            
             foreach(var item in props)
             {
+                //Convert it to the parameter form in string
                 var currentProperty = "{" + $"{item.Name.ToLower()}" + "}";
 
+                //If the string has the currentProperty 
                 if(command.Contains(currentProperty))
                 {
+                    //Add the property and its value to the parameter list
                     parameters.Add(currentProperty, item.GetValue(instance));
                 }
             }

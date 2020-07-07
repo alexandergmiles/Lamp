@@ -30,15 +30,16 @@ namespace Lamp
             
             //Get the current Hue
             Console.WriteLine(bulbColour.Hue);
-           
+
             //Set the bulb to green
             //var result = bulb.SetColour(new LightState(1, 5, "normal", 1, 120, 100, 0, 100));
-            
+
             //Get the colour of the bulb
             //var newBulbColour = bulb.GetColour();
-            
+
             //Console.WriteLine(newBulbColour.Hue);
             bulb.TogglePower();
+
             //Let's print out to the console
             //Console.WriteLine(result);
             //Console.WriteLine(rebootResult.ErrorCode);
