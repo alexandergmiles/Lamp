@@ -28,7 +28,6 @@ namespace Lamp
             //var bulbColour = lamp.GetColour();
 
 
-
             //Get the current Hue
             //Console.WriteLine(bulbColour.Hue);
 

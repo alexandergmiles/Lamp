@@ -189,18 +189,6 @@ namespace LampEngine
             return SendQuery<LightingDTO<GetLightStateDTO>>(command).LightingService.LightStateDTO.AsLightState();
         }
 
-        /// <summary>
-        /// Gets the current colour of the bulb
-        /// </summary>
-        /// <returns>A LightState containing bulb colour information</returns>
-        private String SetColour(LightState colour)
-        {
-            var command = new SetColour(colour);
-            var result = SendQuery(command);
-
-            return result;
-        }
-
         public OperationResult TogglePower()
         {
             var currentLightState = GetColour();
@@ -209,6 +197,18 @@ namespace LampEngine
             oldColourNewPower.OnOff = toggle;
             Console.WriteLine($"Result of operation: {SetColour(oldColourNewPower)}");
             return new OperationResult(0);
+        }
+
+        /// <summary>
+        /// Sets the colour of the bulb. For a non coloured bulb a Hue value will be ignored
+        /// </summary>
+        /// <returns>A LightState containing bulb colour information</returns>
+        private String SetColour(LightState colour)
+        {
+            var command = new SetColour(colour);
+            var result = SendQuery(command);
+
+            return result;
         }
     }
 }
