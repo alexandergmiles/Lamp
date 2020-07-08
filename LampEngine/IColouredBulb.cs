@@ -6,10 +6,6 @@ namespace LampEngine
 {
     public interface IColouredBulb : IBulb
     {
-        public string SetColour(LightState colour);
-
-        public LightState GetColour();
-
-        public OperationResult TogglePower();
+        public OperationResult SetColour(LightState colour);
     }
 }

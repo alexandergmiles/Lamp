@@ -15,5 +15,8 @@ namespace LampEngine
         public BulbInformation GetBulbInfo();
         public OperationResult SetAlias(string AliasToSet);
         public bool isNetworked();
+        public LightState GetColour();
+        public OperationResult TogglePower();
+        public String SetBrightness(int brightness);
     }
 }
