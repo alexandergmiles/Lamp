@@ -1,8 +1,8 @@
 # Lamp
 Desktop controller for TP-Link LB130
 
-###LampEngine task list
-####Base bulb
+### LampEngine task list
+#### Base bulb
 - [x] Connect app to bulb
 - [x] Get bulb info
 - [x] Set power state (on/off)
