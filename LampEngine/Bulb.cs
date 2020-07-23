@@ -169,14 +169,15 @@ namespace LampEngine
         /// </summary>
         /// <param name="colour">A lightstate containing the desired colour</param>
         /// <returns></returns>
-        public String SetBrightness(int brightness)
+        public LightState SetBrightness(int brightness)
         {
             var currentLight = GetColour();
             currentLight.Brightness = brightness;
             var command = new SetColour(currentLight);
             var result = SendQuery(command);
 
-            return result;
+            //Take result and convert it to a result object
+            return JsonConvert.DeserializeObject<LightingDTO<LightTransitionState>>(result).LightingService.LightStateDTO.AsLightState();
         }
 
         /// <summary>

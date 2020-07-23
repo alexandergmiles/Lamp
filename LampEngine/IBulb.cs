@@ -17,6 +17,6 @@ namespace LampEngine
         public bool isNetworked();
         public LightState GetColour();
         public OperationResult TogglePower();
-        public String SetBrightness(int brightness);
+        public LightState SetBrightness(int brightness);
     }
 }

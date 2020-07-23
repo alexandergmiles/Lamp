@@ -37,7 +37,7 @@ namespace Lamp
                         break;
                     default:
                         var localResult = lamp.SetBrightness(Convert.ToInt32(input));
-                        Console.WriteLine(localResult);
+                        Console.WriteLine(localResult.Brightness);
                         break;
                 }
             } while (keepLooping);
