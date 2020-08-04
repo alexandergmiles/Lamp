@@ -12,13 +12,16 @@ namespace Lamp
     {
         public static void Main(string[] args)
         {
-            IBulb lamp = new Bulb("192.168.1.164");
+            IBulb lamp = new Bulb("192.168.1.166");
 
             Console.WriteLine($"Is the lamp on? {lamp.isNetworked()} connected at {lamp.GetNetworkAddress()}");
 
             var systemInfo = lamp.GetBulbInfo();
             var result = lamp.SetBrightness(100);
-            
+            Hub hub = new Hub();
+
+            hub.AttachBulb(lamp);
+//            hub.ExecuteCommand(Bulb, BulbCommand);
             Console.WriteLine(result);
             Console.WriteLine(systemInfo.IsDimmable);
             Console.WriteLine(systemInfo.Model);
