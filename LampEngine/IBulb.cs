@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 
 namespace LampEngine
@@ -11,12 +13,13 @@ namespace LampEngine
     /// </summary>
     public interface IBulb
     {
+        public IPAddress networkAddress { get; set; }
+        public bool isNetworked();
         public string GetNetworkAddress();
+        public OperationResult TogglePower();
         public BulbInformation GetBulbInfo();
         public OperationResult SetAlias(string AliasToSet);
-        public bool isNetworked();
         public LightState GetColour();
-        public OperationResult TogglePower();
         public LightState SetBrightness(int brightness);
     }
 }

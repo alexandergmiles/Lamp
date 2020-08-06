@@ -62,7 +62,6 @@ namespace LampEngine
             return parameters;
         }
 
-
         public string GetCachedResponse => CachedResponse;
 
         /// <summary>

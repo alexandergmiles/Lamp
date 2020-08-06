@@ -5,12 +5,13 @@ using System.Text;
 
 namespace LampEngine
 {
-    public class ColouredBulb : Bulb, IColouredBulb
+    public class ColouredBulb : Bulb
     {
-        public ColouredBulb(string address)
-            : base(address) { }
-        public ColouredBulb(IPAddress address)
-            : base(address) { }
+        public ColouredBulb()
+            :base("192.168.1.164")
+        {
+
+        }
 
         /// <summary>
         /// Sets the colour of the current bulb

@@ -8,5 +8,10 @@ namespace LampEngine
         {
             ErrorCode = errorCode;
         }
+
+        public OperationResult(int errorCode, DTO dObject)
+        {
+            ErrorCode = errorCode;
+        }
     }
 }

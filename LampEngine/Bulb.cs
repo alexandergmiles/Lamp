@@ -164,6 +164,7 @@ namespace LampEngine
             var result = SendQuery<RebootDTO>(reboot);
             return new OperationResult(result.ErrorCode);
         }
+        
         /// <summary>
         /// Sets the brightness of the bulb
         /// </summary>

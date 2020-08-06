@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LampEngine
 {
-    public interface IColouredBulb : IBulb
+    public interface IColouredBulb
     {
         public OperationResult SetColour(LightState colour);
     }
