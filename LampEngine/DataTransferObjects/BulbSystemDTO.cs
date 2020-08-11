@@ -17,8 +17,11 @@ namespace LampEngine
                 systemInformation.BulbInfo.Model,
                 systemInformation.BulbInfo.Description,
                 systemInformation.BulbInfo.Alias,
+                systemInformation.BulbInfo.lightState.AsLightState(),
                 systemInformation.BulbInfo.IsDimmable.Equals(1) ? true : false,
-                systemInformation.BulbInfo.lightState.AsLightState());
+                systemInformation.BulbInfo.IsColour.Equals(1) ? true : false,
+                systemInformation.BulbInfo.IsVariableColourTemp.Equals(1) ? true : false,
+                systemInformation.BulbInfo.lightState.AsLightState().OnOff.Equals(1) ? true : false);
         }
     }
 }

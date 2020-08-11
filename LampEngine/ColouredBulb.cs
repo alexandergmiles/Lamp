@@ -7,8 +7,8 @@ namespace LampEngine
 {
     public class ColouredBulb : Bulb
     {
-        public ColouredBulb()
-            :base("192.168.1.164")
+        public ColouredBulb(string IP)
+            :base(IP)
         {
 
         }

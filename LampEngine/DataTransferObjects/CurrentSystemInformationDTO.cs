@@ -8,104 +8,104 @@ namespace LampEngine
     internal class CurrentSystemInformationDTO : DTO
     {
         [JsonProperty("get_sysinfo")]
-        public SystemInfoDTO BulbInfo { get; set; }
+        internal SystemInfoDTO BulbInfo { get; private set; }
     }
     internal class SystemInfoDTO : DTO
     {
         [JsonProperty("sw_ver")]
-        public string SoftwareVersion { get; set; }
+        internal string SoftwareVersion { get; private set; }
 
         [JsonProperty("hw_ver")]
-        public string HardwareVersion { get; set; }
+        internal string HardwareVersion { get; private set; }
 
         [JsonProperty("model")]
-        public string Model { get; set; }
+        internal string Model { get; private set; }
 
         [JsonProperty("description")]
-        public string Description { get; set; }
+        internal string Description { get; private set; }
 
         [JsonProperty("alias")]
-        public string Alias { get; set; }
+        internal string Alias { get; private set; }
 
         [JsonProperty("mic_type")]
-        public string MicType { get; set; }
+        internal string MicType { get; private set; }
 
         [JsonProperty("dev_state")]
-        public string DevState { get; set; }
+        internal string DevState { get; private set; }
 
         [JsonProperty("mic_mac")]
-        public string MicMAC { get; set; }
+        internal string MicMAC { get; private set; }
 
         [JsonProperty("deviceId")]
-        public string DeviceID { get; set; }
+        internal string DeviceID { get; private set; }
 
         [JsonProperty("oemId")]
-        public string OEMID { get; set; }
+        internal string OEMID { get; private set; }
 
         [JsonProperty("hwId")]
-        public string HardwareID { get; set; }
+        internal string HardwareID { get; private set; }
 
         [JsonProperty("is_factory")]
-        public string isFactory { get; set; }
+        internal string isFactory { get; private set; }
 
         [JsonProperty("disco_ver")]
-        public string DiscoVersion { get; set; }
+        internal string DiscoVersion { get; private set; }
 
         [JsonProperty("ctrl_protocols")]
-        public ControlProtocolsDTO controlProtocols { get; set; }
+        internal ControlProtocolsDTO controlProtocols { get; private set; }
 
         [JsonProperty("light_state")]
-        public LightStateDTO lightState { get; set; }
+        internal LightStateDTO lightState { get; private set; }
 
         [JsonProperty("is_dimmable")]
-        public int IsDimmable { get; set; }
+        internal int IsDimmable { get; private set; }
 
         [JsonProperty("is_color")]
-        public int IsColour { get; set; }
+        internal int IsColour { get; private set; }
 
         [JsonProperty("is_variable_color_temp")]
-        public int IsVariableColourTemp { get; set; }
+        internal int IsVariableColourTemp { get; private set; }
 
         [JsonProperty("preferred_state")]
-        public List<PreferredStateDTO> preferredStates { get; set; }
+        internal List<PreferredStateDTO> preferredStates { get; private set; }
 
         [JsonProperty("rssi")]
-        public int RSSI { get; set; }
+        internal int RSSI { get; private set; }
 
         [JsonProperty("active_mode")]
-        public string ActiveMode { get; set; }
+        internal string ActiveMode { get; private set; }
 
         [JsonProperty("heapsize")]
-        public int HeapSize { get; set; }
+        internal int HeapSize { get; private set; }
 
         [JsonProperty("err_code")]
-        public int ErrorCode { get; set; }
+        internal int ErrorCode { get; private set; }
     }
 
         internal class PreferredStateDTO : DTO
     {
         [JsonProperty("index")]
-        public int Index { get; set; }
+        internal int Index { get; private set; }
         
         [JsonProperty("hue")]
-        public int Hue { get; set; }
+        internal int Hue { get; private set; }
 
         [JsonProperty("saturation")]
-        public int Saturation { get; set; }
+        internal int Saturation { get; private set; }
 
         [JsonProperty("color_temp")]
-        public int ColourTemperature { get; set; }
+        internal int ColourTemperature { get; private set; }
 
         [JsonProperty("brightness")]
-        public int Brightness { get; set; }
+        internal int Brightness { get; private set; }
     }
 
     internal class ControlProtocolsDTO : DTO
     {
         [JsonProperty("name")]
-        public string Name { get; set; }
+        internal string Name { get; private set; }
 
         [JsonProperty("version")]
-        public string Version { get; set; }
+        internal string Version { get; private set; }
     }
 }

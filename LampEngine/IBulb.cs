@@ -16,7 +16,8 @@ namespace LampEngine
         public IPAddress networkAddress { get; set; }
         public bool isNetworked();
         public string GetNetworkAddress();
-        public OperationResult TogglePower();
+        public OperationResult PowerOn();
+        public OperationResult PowerOff();
         public BulbInformation GetBulbInfo();
         public OperationResult SetAlias(string AliasToSet);
         public LightState GetColour();

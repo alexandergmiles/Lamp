@@ -191,12 +191,20 @@ namespace LampEngine
             return SendQuery<LightingDTO<GetLightStateDTO>>(command).LightingService.LightStateDTO.AsLightState();
         }
 
-        public OperationResult TogglePower()
+        public OperationResult PowerOn()
         {
             var currentLightState = GetColour();
-            var toggle = (currentLightState.OnOff.Equals(0) ? 1 : 0);
             var oldColourNewPower = currentLightState;
-            oldColourNewPower.OnOff = toggle;
+            oldColourNewPower.OnOff = 1;
+            Console.WriteLine($"Result of operation: {SetColour(oldColourNewPower)}");
+            return new OperationResult(0);
+        }
+
+        public OperationResult PowerOff()
+        {
+            var currentLightState = GetColour();
+            var oldColourNewPower = currentLightState;
+            oldColourNewPower.OnOff = 0;
             Console.WriteLine($"Result of operation: {SetColour(oldColourNewPower)}");
             return new OperationResult(0);
         }

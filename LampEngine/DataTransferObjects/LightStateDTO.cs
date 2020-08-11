@@ -8,25 +8,25 @@ namespace LampEngine
     internal class LightStateDTO : DTO
     {
         [JsonProperty("on_off")]
-        public int OnOff { get; set; }
+        private int OnOff { get; set; }
 
         [JsonProperty("mode")]
-        public string Mode { get; set; }
+        private string Mode { get; set; }
 
         [JsonProperty("hue")]
-        public int Hue { get; set; }
+        private int Hue { get; set; }
 
         [JsonProperty("saturation")]
-        public int Saturation { get; set; }
+        private int Saturation { get; set; }
 
         [JsonProperty("color_temp")]
-        public int ColourTemperature { get; set; }
+        private int ColourTemperature { get; set; }
 
         [JsonProperty("brightness")]
-        public int Brightness { get; set; }
+        private int Brightness { get; set; }
 
         [JsonProperty("err_code")]
-        public int ErrorCode { get; set; }
+        private int ErrorCode { get; set; }
 
         public LightState AsLightState() =>  new LightState(1, 5, "normal", OnOff, Hue, Saturation, ColourTemperature, Brightness);
        
