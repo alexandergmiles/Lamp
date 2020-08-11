@@ -24,6 +24,7 @@ namespace Lamp
 
             var result = lamp.SetBrightness(100);
             lamp.SetColour(whiteLampColour);
+
             Console.WriteLine($"Is the bulb on? {systemInfo.IsOn}");
 
             if(systemInfo.IsOn == false)
